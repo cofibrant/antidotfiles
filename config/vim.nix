@@ -98,7 +98,7 @@ in
       nnoremap <tab> %
       vnoremap <tab> %
 
-      nnoremap <C-f> :VimFilerExplorer<cr>
+      nnoremap <C-e> :VimFilerExplorer<cr>
       let g:vimfiler_as_default_explorer = 1
 
       let g:lightline = {}
