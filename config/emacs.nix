@@ -61,7 +61,7 @@
 
     (setq doom-themes-enable-bold t
           doom-themes-enable-italic t)
-    (load-theme 'doom-vibrant t)
+    (load-theme 'doom-gruvbox t)
 
     (global-set-key [f8] 'neotree-toggle)
     (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
