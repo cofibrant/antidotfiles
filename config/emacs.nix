@@ -15,6 +15,10 @@
     ];
   };
 
+  home.file.".emacs.d/doom-iro-theme.el" = {
+    source = ./doom-iro-theme.el;
+  };
+
   home.file.".emacs".text = ''
     (require 'evil)
     (require 'magit)
@@ -61,7 +65,7 @@
 
     (setq doom-themes-enable-bold t
           doom-themes-enable-italic t)
-    (load-theme 'doom-gruvbox t)
+    (load-theme 'doom-iro t)
 
     (global-set-key [f8] 'neotree-toggle)
     (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
@@ -115,7 +119,8 @@
 
     (show-paren-mode)
 
-    (load-file (let ((coding-system-for-read 'utf-8))
-                    (shell-command-to-string "agda-mode locate")))
+    (if (executable-find "agda")
+      (load-file (let ((coding-system-for-read 'utf-8))
+                       (shell-command-to-string "agda-mode locate"))))
   '';
 }
