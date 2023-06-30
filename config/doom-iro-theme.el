@@ -109,7 +109,7 @@ background contrast. All other values default to \"medium\"."
    (modeline-bg bg-alt2)
    (modeline-fg (doom-lighten fg-alt 0.25))
    (modeline-inactive-bg (doom-darken modeline-bg 0.15))
-   (modeline-inactive-fg base6)
+   (modeline-inactive-fg fg)
 
    (org-quote `(,(doom-lighten (car bg) 0.05) "#1f1f1f")))
 
