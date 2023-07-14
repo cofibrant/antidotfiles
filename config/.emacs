@@ -107,11 +107,21 @@
 ;; Agda mode
 
 (if (executable-find "agda")
-    (load-file (let ((coding-system-for-read 'utf-8))
-		      (shell-command-to-string "agda-mode locate"))))
-    (setq agda2-program-args '("+RTS" "-M6G" "-H3.5G" "-A128M" "-RTS"))
+    (progn
+      (load-file (let ((coding-system-for-read 'utf-8))
+		   (shell-command-to-string "agda-mode locate")))
+      (setq agda2-program-args '("+RTS" "-M6G" "-H3.5G" "-A128M" "-RTS"))))
 
 ;; Whitespace
 
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 (setq require-final-newline t)
+
+;; `direnv` integration
+
+ ;; Documentation say to initialise as late as possible
+(if (executable-find "direnv")
+    (use-package envrc
+      :demand t
+      :config
+      (envrc-global-mode)))

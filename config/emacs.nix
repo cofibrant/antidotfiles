@@ -16,6 +16,7 @@
       doom-modeline
       fira-code-mode
       all-the-icons
+      envrc
     ];
   };
 
