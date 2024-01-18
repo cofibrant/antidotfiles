@@ -45,7 +45,7 @@
         };
         size = 13.0;
       };
-      key_bindings = [
+      keyboard.bindings = [
         {
           key = "Key3";
           mods = "Alt";
