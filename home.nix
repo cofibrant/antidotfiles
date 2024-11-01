@@ -68,7 +68,7 @@ in
         font-awesome_5
         liberation_ttf
         noto-fonts
-        noto-fonts-cjk
+        noto-fonts-cjk-sans
         noto-fonts-emoji
         emacs-all-the-icons-fonts
 
@@ -87,6 +87,7 @@ in
         zip
         unzip
 
+        inkscape
         texlive.combined.scheme-full
       ] ++ lib.optionals stdenv.isDarwin [
         cocoapods
