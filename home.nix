@@ -77,6 +77,8 @@ in
         rustup
         yarn
         nodejs
+        ninja
+        cmake
 
         bat
         coreutils
