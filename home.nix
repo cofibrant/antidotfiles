@@ -79,6 +79,7 @@ in
         nodejs
         ninja
         cmake
+        clang-tools
 
         bat
         coreutils

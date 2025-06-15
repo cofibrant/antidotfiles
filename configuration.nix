@@ -7,7 +7,6 @@
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
   ];
   nix.settings.trusted-users = [ "@admin" ];
-  nix.configureBuildUsers = true;
 
   nix.extraOptions = ''
     auto-optimise-store = true
@@ -18,12 +17,8 @@
 
   programs.fish.enable = true;
 
-  services.nix-daemon.enable = true;
-
   environment.systemPackages = with pkgs; [];
   environment.shells = with pkgs; [ fish zsh ];
-
-  security.pam.enableSudoTouchIdAuth = true;
 
   users = {
     users.nathan = {
