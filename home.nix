@@ -61,7 +61,7 @@ in
 
       packages = with pkgs; [
         alacritty
-        tmux
+        # tmux
 
         fira-code
         fira-code-symbols
@@ -70,7 +70,7 @@ in
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-emoji
-        emacs-all-the-icons-fonts
+        # emacs-all-the-icons-fonts
 
         gnumake
         python3
@@ -90,7 +90,6 @@ in
         zip
         unzip
 
-        inkscape
         texlive.combined.scheme-full
       ] ++ lib.optionals stdenv.isDarwin [
         cocoapods
