@@ -48,9 +48,6 @@ in
     };
 
   config = {
-    programs.direnv.enable = true;
-    programs.direnv.nix-direnv.enable = true;
-
     home = {
       stateVersion = "23.05";
 
@@ -61,23 +58,13 @@ in
 
       packages = with pkgs; [
         alacritty
-        # tmux
+        nvchad
 
-        fira-code
-        fira-code-symbols
-        font-awesome_5
-        liberation_ttf
-        noto-fonts
-        noto-fonts-cjk-sans
-        noto-fonts-emoji
-        # emacs-all-the-icons-fonts
+        nerd-fonts.fira-code
 
         gnumake
         python3
         rustup
-        yarn
-        nodejs
-        ninja
         cmake
         clang-tools
 
@@ -87,8 +74,6 @@ in
         gitAndTools.git-lfs
         wget
         tree
-        zip
-        unzip
 
         texlive.combined.scheme-full
       ] ++ lib.optionals stdenv.isDarwin [
