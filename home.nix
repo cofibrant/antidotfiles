@@ -57,10 +57,8 @@ in
       sessionPath = ["\${HOME}/.cargo/bin"];
 
       packages = with pkgs; [
-        alacritty
-        nvchad
-
         nerd-fonts.fira-code
+        nvchad
 
         gnumake
         python3
@@ -79,6 +77,8 @@ in
       ] ++ lib.optionals stdenv.isDarwin [
         cocoapods
         m-cli
+      ] ++ lib.optionals (!stdenv.isDarwin) [
+        ghostty
       ];
     };
   };
