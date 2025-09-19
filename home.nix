@@ -58,7 +58,6 @@ in
 
       packages = with pkgs; [
         nerd-fonts.fira-code
-        nvchad
 
         gnumake
         python3

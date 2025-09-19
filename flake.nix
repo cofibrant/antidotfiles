@@ -12,24 +12,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    nix4nvchad = {
-      url = "github:nix-community/nix4nvchad";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager, nix4nvchad, ... }@inputs:
+  outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs:
   let 
     inherit (darwin.lib) darwinSystem;
     inherit (inputs.nixpkgs-unstable.lib) attrValues makeOverridable optionalAttrs singleton;
 
     nixpkgsConfig = {
       config = { allowUnfree = true; };
-      overlays = [
-        (final: prev: {
-          nvchad = nix4nvchad.packages."${prev.stdenv.system}".nvchad;
-        })
-      ];
     };
     
   in
@@ -48,7 +39,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.nathan = {pkgs, ...}: {
+              users.nathan = {...}: {
                 imports = [
                   (import ./home.nix)
                   (import ./config)

@@ -2,10 +2,11 @@
 
 {
   imports = [
+    ./direnv.nix
     ./fish.nix
-    ./starship.nix
     ./git.nix
     ./gh.nix
-    ./direnv.nix
+    ./neovim.nix
+    ./starship.nix
   ];
 }
