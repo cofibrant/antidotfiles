@@ -13,6 +13,12 @@
       ${builtins.readFile ./neovim/keymaps.lua}
     '';
 
-    plugins = with pkgs.vimPlugins; [];
+    plugins = with pkgs.vimPlugins; [
+      {
+        plugin = gruvbox-nvim;
+        config = builtins.readFile ./neovim/plugins/gruvbox.lua;
+        type = "lua";
+      }
+    ];
   };
 }
