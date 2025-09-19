@@ -18,8 +18,8 @@
       directory = {
         truncation_length = 2;
         truncate_to_repo = false;
-        style = "purple";
-        before_repo_root_style = "purple";
+        style = "bold purple";
+        before_repo_root_style = "bold purple";
         repo_root_style = "bold cyan";
         read_only_style = "red";
         home_symbol = "~";

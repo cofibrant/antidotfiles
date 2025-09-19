@@ -58,22 +58,26 @@ in
 
       # TODO(@cofibrant) add `ghostty` carefully for relevant systems
       packages = with pkgs; [
+      	# fonts
         nerd-fonts.fira-code
-
-        gnumake
+	# dev tools
         python3
         rustup
-        cmake
+        gnumake
         clang-tools
-
-        coreutils
+        cmake
+	# version control
         gitAndTools.delta
         gitAndTools.git-lfs
+	# utilities
+        coreutils
         wget
         tree
-
+	ripgrep
+	# type-setting
         texlive.combined.scheme-full
       ] ++ lib.optionals stdenv.isDarwin [
+      	# macOS noise
         cocoapods
         m-cli
       ];
