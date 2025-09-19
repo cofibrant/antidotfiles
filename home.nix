@@ -56,6 +56,7 @@ in
       language.base = "en_GB.utf8";
       sessionPath = ["\${HOME}/.cargo/bin"];
 
+      # TODO(@cofibrant) add `ghostty` carefully for relevant systems
       packages = with pkgs; [
         nerd-fonts.fira-code
 
@@ -65,7 +66,6 @@ in
         cmake
         clang-tools
 
-        bat
         coreutils
         gitAndTools.delta
         gitAndTools.git-lfs
@@ -76,8 +76,6 @@ in
       ] ++ lib.optionals stdenv.isDarwin [
         cocoapods
         m-cli
-      ] ++ lib.optionals (!stdenv.isDarwin) [
-        ghostty
       ];
     };
   };

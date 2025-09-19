@@ -1,5 +1,5 @@
 {
-  description = "Nathan's darwin system";
+  description = "cofibrant's dotfiles";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-22.11-darwin";
