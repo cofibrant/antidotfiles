@@ -4,7 +4,7 @@ require('telescope').setup({
         selection_caret = " ",
         entry_prefix = " ",
         sorting_strategy = "ascending",
-        border = false;
+        border = true;
         layout_config = {
             horizontal = {
                 prompt_position = "top",

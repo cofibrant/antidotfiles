@@ -4,6 +4,9 @@ local opt = vim.opt
 local o = vim.o
 local g = vim.g
 
+-- base46 cache path
+g.base46_cache = vim.fn.stdpath "data" .. "/base46_cache/"
+
 -- disable `netrw` (for `nvim-tree.lua`)
 g.loaded_netrw = true
 g.loaded_netrwPlugin = true
@@ -17,6 +20,10 @@ o.laststatus = 3
 o.showmode = false
 opt.fillchars = { eob = ' ' }
 
+-- mouse input in all modes
+o.mouse = 'a'
+-- makes directional keys wrap lines
+opt.whichwrap:append "<>[]hl"
 
 -- numbers
 opt.number = true
@@ -42,17 +49,17 @@ opt.foldlevelstart = 99
 
 -- Keybinds
 
--- Keymapping utility function
+-- keymapping utility function
 local function map(mode, lhs, rhs, desc, opts)
     opts = opts or { silent = true }
     opts.desc = desc
     vim.keymap.set(mode, lhs, rhs, opts)
 end
 
--- Rebind leader to <Space>
+-- rebind leader to <Space>
 g.mapleader = " "
 
--- Insert mode movement
+-- insert mode movement
 map("i", "<C-h>", "<Left>", "move left")
 map("i", "<C-l>", "<Right>", "move right")
 map("i", "<C-j>", "<Down>", "move down")
@@ -83,3 +90,8 @@ map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", "telescop
 
 -- misc
 map("n", "<Esc>", "<cmd>noh<CR>", "clear highlights")
+
+-- base46 eager setup
+for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
+    dofile(vim.g.base46_cache .. v)
+end
