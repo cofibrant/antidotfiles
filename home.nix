@@ -60,21 +60,21 @@ in
       packages = with pkgs; [
       	# fonts
         nerd-fonts.fira-code
-	# dev tools
+        # dev tools
         python3
         rustup
         gnumake
         clang-tools
         cmake
-	# version control
+        # version control
         gitAndTools.delta
         gitAndTools.git-lfs
-	# utilities
+        # utilities
         coreutils
         wget
         tree
-	ripgrep
-	# type-setting
+        ripgrep
+        # type-setting
         texlive.combined.scheme-full
       ] ++ lib.optionals stdenv.isDarwin [
       	# macOS noise
