@@ -15,7 +15,15 @@
     vimdiffAlias = true;
 
     extraLuaConfig = builtins.readFile ./neovim/settings.lua;
-    plugins = with pkgs.vimPlugins; [
+    plugins =
+      with pkgs.vimPlugins;
+      let
+        autoConfig = pkg: require: {
+          plugin = pkg;
+          config = "require('${require}').setup()";
+          type = "lua";
+        };
+      in [
       {
         plugin = base46;
         config = ''
@@ -40,27 +48,64 @@
           p.tree-sitter-python
           p.tree-sitter-cpp
           p.tree-sitter-rust
+          p.tree-sitter-html
+          p.tree-sitter-css
+          p.tree-sitter-javascript
+          p.tree-sitter-json
         ]));
         config = builtins.readFile ./neovim/plugins/treesitter.lua;
         type = "lua";
       }
 
       {
-        plugin = nvim-tree-lua;
-        config = "require('nvim-tree').setup()";
+        plugin = nvim-lspconfig;
+        config = ''local lsp = vim.lsp
+
+          lsp.config('rust-analyzer', {
+            cmd = { '${pkgs.rust-analyzer}/bin/rust-analyzer' },
+            filetypes = { 'rust' },
+            root_markers = { 'Cargo.toml' },
+          })
+          
+          lsp.config('clangd', {
+            cmd = { '${pkgs.clang-tools}/bin/clangd' },
+            filetypes = { 'c', 'cpp' },
+            root_markers = { '.clangd', 'compile_commands.json' },
+          })
+          
+          lsp.enable('rust-analyzer')
+          lsp.enable('clangd')'';
         type = "lua";
       }
 
+      vim-vsnip
+      friendly-snippets
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      cmp-cmdline
+      cmp-vsnip
+
       {
-        plugin = comment-nvim;
-        config = "require('Comment').setup()";
+        plugin = nvim-cmp;
+        config = builtins.readFile ./neovim/plugins/cmp.lua;
         type = "lua";
       }
 
+      (autoConfig nvim-tree-lua "nvim-tree")
+      (autoConfig comment-nvim "Comment")
+      (autoConfig nvim-colorizer-lua "colorizer")
+      # TODO(@cofibrant) on attach bindings for blame
+      (autoConfig gitsigns-nvim "gitsigns")
+      (autoConfig trouble-nvim "trouble")
+
       {
-        # TODO(@cofibrant) on attach bindings for blame
-        plugin = gitsigns-nvim;
-        config = "require('gitsigns').setup()";
+        plugin = nvim-colorizer-lua;
+        config = ''require('colorizer').setup({
+          filetypes = { "*" },
+          user_default_options = { names = false },
+          buftypes = {},
+        })'';
         type = "lua";
       }
 
@@ -73,6 +118,11 @@
         type = "lua";
       }
 
+      {
+        plugin = nvim-autopairs;
+        config = builtins.readFile ./neovim/plugins/autopairs.lua;
+        type = "lua";
+      }
     ];
   };
 }
