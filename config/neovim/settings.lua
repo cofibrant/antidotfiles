@@ -99,11 +99,6 @@ map({"i", "s"}, "<S-Tab>", function()
   return vim.fn["vsnip#jumpable"](-1) == 1 and "<Plug>(vsnip-jump-prev)" or "<S-Tab>"
 end, "vsnip jump to previous", { expr = true })
 
--- base46 eager setup
-for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
-    dofile(vim.g.base46_cache .. v)
-end
-
 -- trouble
 map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", "trouble toggle global diagnostics");
 map("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", "trouble toggle buffer diagnostics");
@@ -111,3 +106,16 @@ map("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", "trouble t
 map("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", "trouble toggle lsp");
 map("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", "trouble toggle location list");
 map("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", "trouble toggle quickfix list");
+
+-- diagnostic icons
+local symbols = { Error = "", Info = "", Hint = "", Warn = "" }
+
+for name, icon in pairs(symbols) do
+	local hl = "DiagnosticSign" .. name
+	vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
+end
+
+-- base46 eager setup
+for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
+    dofile(vim.g.base46_cache .. v)
+end

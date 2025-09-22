@@ -93,11 +93,13 @@
       }
 
       (autoConfig nvim-tree-lua "nvim-tree")
+      (autoConfig nvim-web-devicons "nvim-tree")
       (autoConfig comment-nvim "Comment")
       (autoConfig nvim-colorizer-lua "colorizer")
       # TODO(@cofibrant) on attach bindings for blame
       (autoConfig gitsigns-nvim "gitsigns")
       (autoConfig trouble-nvim "trouble")
+      (autoConfig auto-save-nvim "auto-save")
 
       {
         plugin = nvim-colorizer-lua;
@@ -121,6 +123,12 @@
       {
         plugin = nvim-autopairs;
         config = builtins.readFile ./neovim/plugins/autopairs.lua;
+        type = "lua";
+      }
+
+      {
+        plugin = lualine-nvim;
+        config = builtins.readFile ./neovim/plugins/lualine.lua;
         type = "lua";
       }
     ];
