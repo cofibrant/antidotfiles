@@ -39,6 +39,7 @@ opt.expandtab = true
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.smartindent = true
+opt.smarttab = true
 
 -- continue comments when going down a line, hit C-u to remove the added comment prefix
 opt.formatoptions:append("cro")
@@ -66,10 +67,10 @@ map("i", "<C-j>", "<Down>", "move down")
 map("i", "<C-k>", "<Up>", "move up")
 
 -- window movement
-map({"n", "t"}, "<C-h>", "<C-w>h")
-map({"n", "t"}, "<C-j>", "<C-w>j")
-map({"n", "t"}, "<C-k>", "<C-w>k")
-map({"n", "t"}, "<C-l>", "<C-w>l")
+map({"n", "t"}, "<C-h>", "<Cmd>wincmd h<CR>")
+map({"n", "t"}, "<C-j>", "<Cmd>wincmd j<CR>")
+map({"n", "t"}, "<C-k>", "<Cmd>wincmd k<CR>")
+map({"n", "t"}, "<C-l>", "<Cmd>wincmd l<CR>")
 
 -- comments
 map("n", "<leader>/", "gcc", "toggle comment", { remap = true })
@@ -106,6 +107,25 @@ map("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", "trouble t
 map("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", "trouble toggle lsp");
 map("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", "trouble toggle location list");
 map("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", "trouble toggle quickfix list");
+
+-- repeatable movement
+local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+
+map({"n", "x", "o"}, ";", ts_repeat_move.repeat_last_move, "repeat last move")
+map({"n", "x", "o"}, ",", ts_repeat_move.repeat_last_move_opposite, "oppose last move")
+map({"n", "x", "o"}, "f", ts_repeat_move.builtin_f_expr, "find forward", { expr = true })
+map({"n", "x", "o"}, "F", ts_repeat_move.builtin_F_expr, "find backward", { expr = true })
+map({"n", "x", "o"}, "t", ts_repeat_move.builtin_t_expr, "'til forward", { expr = true })
+map({"n", "x", "o"}, "T", ts_repeat_move.builtin_T_expr, "'til backward", { expr = true })
+
+local gs = require("gitsigns")
+local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
+
+map({"n", "x", "o"}, "]h", next_hunk_repeat, "next hunk")
+map({"n", "x", "o"}, "[h", prev_hunk_repeat, "previous hunk")
+
+-- disable splash nonsense
+vim.cmd("set shortmess+=I")
 
 -- diagnostic icons
 local symbols = { Error = "", Info = "", Hint = "", Warn = "" }

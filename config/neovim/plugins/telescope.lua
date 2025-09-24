@@ -1,3 +1,6 @@
+local actions = require("telescope.actions")
+local open_with_trouble = require("trouble.sources.telescope").open
+
 require('telescope').setup({
     defaults = {
         prompt_prefix = "   ",
@@ -14,7 +17,13 @@ require('telescope').setup({
             height = 0.80,
         },
         mappings = {
-            n = { ["q"] = require("telescope.actions").close },
+            n = { 
+              ["q"] = actions.close,
+              ["<C-t>"] = open_with_trouble,
+            },
+            i = {
+              ["<C-t>"] = open_with_trouble,
+            },
         },
     },
     extensions = {},

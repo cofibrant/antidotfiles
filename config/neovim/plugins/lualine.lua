@@ -56,6 +56,12 @@ require("lualine").setup({
         'filename',
         icons_enabled = true,
         color = { fg = colors.pink },
+        symbols = {
+          modified = '*',
+          readonly = '󰌾',
+          unnamed = '[no name]',
+          newfile = '[new]'
+        },
       },
       {
         'branch',
@@ -78,7 +84,7 @@ require("lualine").setup({
       },
       {
         'filetype',
-        color = { fg = colors.purple },
+        color = { fg = colors.grey_fg2 },
       },
       {
         'o:encoding',

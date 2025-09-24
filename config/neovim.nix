@@ -57,6 +57,8 @@
         type = "lua";
       }
 
+      nvim-treesitter-textobjects
+
       {
         plugin = nvim-lspconfig;
         config = ''local lsp = vim.lsp
@@ -78,8 +80,10 @@
         type = "lua";
       }
 
+      targets-vim
       vim-vsnip
       friendly-snippets
+
       cmp-nvim-lsp
       cmp-buffer
       cmp-path
@@ -92,8 +96,13 @@
         type = "lua";
       }
 
-      (autoConfig nvim-tree-lua "nvim-tree")
-      (autoConfig nvim-web-devicons "nvim-tree")
+      {
+        plugin = nvim-tree-lua;
+        config = builtins.readFile ./neovim/plugins/tree.lua;
+        type = "lua";
+      }
+
+      (autoConfig nvim-web-devicons "nvim-web-devicons")
       (autoConfig comment-nvim "Comment")
       (autoConfig nvim-colorizer-lua "colorizer")
       # TODO(@cofibrant) on attach bindings for blame
@@ -129,6 +138,16 @@
       {
         plugin = lualine-nvim;
         config = builtins.readFile ./neovim/plugins/lualine.lua;
+        type = "lua";
+      }
+
+      {
+        plugin = toggleterm-nvim;
+        config = ''require('toggleterm').setup({
+          shade_terminals = false,
+          direction = 'horizontal',
+          open_mapping = [[<C-\>]]
+        })'';
         type = "lua";
       }
     ];
