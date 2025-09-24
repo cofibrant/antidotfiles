@@ -1,4 +1,4 @@
-{ lib, config, ...}:
+{ lib, config, ... }:
 
 {
   programs.starship = {
@@ -44,8 +44,8 @@
         added_style = "bold fg:zero bg:green";
         deleted_style = "bold fg:zero bg:red";
         format = lib.concatStrings [
-         "[]($added_style inverted fg:prev_bg)[$added ]($added_style)" 
-         "[]($deleted_style inverted fg:prev_bg)[$deleted ]($deleted_style)"
+          "[]($added_style inverted fg:prev_bg)[$added ]($added_style)"
+          "[]($deleted_style inverted fg:prev_bg)[$deleted ]($deleted_style)"
         ];
       };
       git_status = {

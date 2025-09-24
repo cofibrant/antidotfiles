@@ -1,18 +1,21 @@
-{ config, pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
-let
-  cfg = config.antidotfiles;
-in
 {
   options.antidotfiles.colours =
     let
-      mkColour = description: default: mkOption {
-        inherit default;
-        description = "Define the colour for ${description}.";
-        example = "ffffff";
-        type = types.str;
-      };
+      mkColour =
+        description: default:
+        mkOption {
+          inherit default;
+          description = "Define the colour for ${description}.";
+          example = "ffffff";
+          type = types.str;
+        };
     in
     {
       black = mkColour "black" "6d7381";
@@ -54,33 +57,36 @@ in
       username = "nathan";
       keyboard.layout = "gb";
       language.base = "en_GB.utf8";
-      sessionPath = ["\${HOME}/.cargo/bin"];
+      sessionPath = [ "\${HOME}/.cargo/bin" ];
 
       # TODO(@cofibrant) add `ghostty` carefully for relevant systems
-      packages = with pkgs; [
-      	# fonts
-        nerd-fonts.fira-code
-        # dev tools
-        python3
-        rustup
-        gnumake
-        clang-tools
-        cmake
-        # version control
-        gitAndTools.delta
-        gitAndTools.git-lfs
-        # utilities
-        coreutils
-        wget
-        tree
-        ripgrep
-        # type-setting
-        texlive.combined.scheme-full
-      ] ++ lib.optionals stdenv.isDarwin [
-      	# macOS noise
-        cocoapods
-        m-cli
-      ];
+      packages =
+        with pkgs;
+        [
+          # fonts
+          nerd-fonts.fira-code
+          # dev tools
+          python3
+          rustup
+          gnumake
+          clang-tools
+          cmake
+          # version control
+          gitAndTools.delta
+          gitAndTools.git-lfs
+          # utilities
+          coreutils
+          wget
+          tree
+          ripgrep
+          # type-setting
+          texlive.combined.scheme-full
+        ]
+        ++ lib.optionals stdenv.isDarwin [
+          # macOS noise
+          cocoapods
+          m-cli
+        ];
     };
   };
 }
