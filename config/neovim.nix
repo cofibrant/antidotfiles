@@ -103,10 +103,12 @@
                 stylua = { command = "${pkgs.stylua}/bin/stylua" },
                 clang_format = { command = "${pkgs.clang-tools}/bin/clang-format" },
                 nixfmt = { command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt" },
-                rustfmt = { command = "${pkgs.rustup}/bin/rustup", args = { "run", "stable", "rustfmt" } }
+                rustfmt = { command = "${pkgs.rustup}/bin/rustup", args = { "run", "stable", "rustfmt" } },
+                black = { command = "${pkgs.black}/bin/black" },
               },
               formatters_by_ft = {
                 lua = { "stylua" },
+                python = { "black" },
                 rust = { "rustfmt" },
                 cpp = { "clang_format" },
                 nix = { "nixfmt" },
