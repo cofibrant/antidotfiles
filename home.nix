@@ -50,11 +50,12 @@ with lib;
       light4 = mkColour "lighter grey" "8f9fa1";
     };
 
+  imports = [ (import ./config) ];
+
   config = {
     home = {
       stateVersion = "23.05";
 
-      username = "nathan";
       keyboard.layout = "gb";
       language.base = "en_GB.utf8";
       sessionPath = [ "\${HOME}/.cargo/bin" ];

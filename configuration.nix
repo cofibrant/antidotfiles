@@ -1,4 +1,8 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 {
   system.stateVersion = 4;
 
@@ -21,14 +25,5 @@
   environment.systemPackages = [ ];
   environment.shells = with pkgs; [
     fish
-    zsh
   ];
-
-  users = {
-    users.nathan = {
-      name = "nathan";
-      home = "/Users/nathan";
-      shell = pkgs.fish;
-    };
-  };
 }
