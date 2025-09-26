@@ -1,10 +1,11 @@
 { pkgs, config, ... }:
 
+with config.antidotfiles.toggles;
 {
   # TODO(@cofibrant) switch to managing `ghostty` installation via `nix`
   # if / when package is released
   # (c.f. https://github.com/ghostty-org/ghostty/discussions/2824)
-  programs.ghostty.enable = !pkgs.stdenv.isDarwin;
+  programs.ghostty.enable = !pkgs.stdenv.isDarwin && enableGUIUtilities;
   home.file = {
     # Config reference https://ghostty.org/docs/config/reference
     ".config/ghostty/config".text = ''

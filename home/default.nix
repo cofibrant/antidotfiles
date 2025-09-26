@@ -1,23 +1,32 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }:
 
 with lib;
+let
+  mkColour =
+    description: default:
+    mkOption {
+      inherit default;
+      description = "Define the colour for ${description}.";
+      example = "ffffff";
+      type = types.str;
+    };
+
+  mkToggle =
+    description: default:
+    mkOption {
+      inherit default;
+      description = "Toggle installation of ${description}";
+      type = types.bool;
+    };
+in
 {
-  options.antidotfiles.colours =
-    let
-      mkColour =
-        description: default:
-        mkOption {
-          inherit default;
-          description = "Define the colour for ${description}.";
-          example = "ffffff";
-          type = types.str;
-        };
-    in
-    {
+  options.antidotfiles = {
+    colours = {
       black = mkColour "black" "6d7381";
       red = mkColour "red" "d84231";
       green = mkColour "green" "78c42d";
@@ -50,6 +59,16 @@ with lib;
       light4 = mkColour "lighter grey" "8f9fa1";
     };
 
+    toggles = {
+      enableDevTools = mkToggle "development tools" true;
+      enableCLIUtils = mkToggle "CLI utilities" true;
+      enableGit = mkToggle "Git and associated tools" true;
+      enableGUIUtils = mkToggle "GUI utilities" true;
+      enableFonts = mkToggle "fonts" true;
+      enableTypesetting = mkToggle "type-setting tools" false;
+    };
+  };
+
   imports = [
     ./direnv.nix
     ./fish.nix
@@ -70,24 +89,33 @@ with lib;
 
       packages =
         with pkgs;
-        [
-          # fonts
-          nerd-fonts.fira-code
-          # dev tools
+        with config.antidotfiles.toggles;
+        optionals enableDevTools [
+          # development tools
           python3
           rustup
           gnumake
           clang-tools
           cmake
-          # version control
+        ]
+        ++ optionals enableFonts [
+          # fonts
+          nerd-fonts.fira-code
+        ]
+        ++ optionals enableGit [
+          # git and tools
           gitAndTools.delta
           gitAndTools.git-lfs
-          # utilities
+        ]
+        ++ optionals enableCLIUtils [
+          # CLI utilities
           coreutils
           wget
           tree
           ripgrep
-          # type-setting
+        ]
+        ++ optionals enableTypesetting [
+          # typesetting
           texlive.combined.scheme-full
         ]
         ++ optionals stdenv.isDarwin [

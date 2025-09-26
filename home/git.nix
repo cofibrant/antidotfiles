@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   programs.git = {
-    enable = true;
+    enable = config.antidotfiles.toggles.enableGit;
     userEmail = "me@nathancorbyn.com";
     userName = "Nathan Corbyn";
     extraConfig = {

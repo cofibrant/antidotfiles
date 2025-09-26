@@ -1,13 +1,20 @@
-{ pkgs, ... }:
-
 {
-  home.file."./.config/nvim/lua/themes/" = {
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+
+with lib;
+with config.antidotfiles.toggles;
+{
+  home.file."./.config/nvim/lua/themes/" = optionals enableDevTools {
     source = ./neovim/themes;
     recursive = true;
   };
 
   programs.neovim = {
-    enable = true;
+    enable = enableDevTools;
 
     defaultEditor = true;
     viAlias = true;
@@ -23,6 +30,12 @@
           config = "require('${require}').setup()";
           type = "lua";
         };
+
+        luaConfig = pkg: file: {
+          plugin = pkg;
+          config = builtins.readFile file;
+          type = "lua";
+        };
       in
       [
         {
@@ -34,31 +47,20 @@
           type = "lua";
         }
 
-        {
-          plugin = telescope-nvim;
-          config = builtins.readFile ./neovim/plugins/telescope.lua;
-          type = "lua";
-        }
-
-        {
-          plugin = (
-            nvim-treesitter.withPlugins (p: [
-              p.tree-sitter-nix
-              p.tree-sitter-lua
-              p.tree-sitter-vim
-              p.tree-sitter-json
-              p.tree-sitter-python
-              p.tree-sitter-cpp
-              p.tree-sitter-rust
-              p.tree-sitter-html
-              p.tree-sitter-css
-              p.tree-sitter-javascript
-              p.tree-sitter-json
-            ])
-          );
-          config = builtins.readFile ./neovim/plugins/treesitter.lua;
-          type = "lua";
-        }
+        (luaConfig telescope-nvim ./neovim/plugins/telescope.lua)
+        (luaConfig (nvim-treesitter.withPlugins (p: [
+          p.tree-sitter-nix
+          p.tree-sitter-lua
+          p.tree-sitter-vim
+          p.tree-sitter-json
+          p.tree-sitter-python
+          p.tree-sitter-cpp
+          p.tree-sitter-rust
+          p.tree-sitter-html
+          p.tree-sitter-css
+          p.tree-sitter-javascript
+          p.tree-sitter-json
+        ])) ./neovim/plugins/treesitter.lua)
 
         nvim-treesitter-textobjects
 
@@ -137,17 +139,8 @@
         cmp-cmdline
         cmp-vsnip
 
-        {
-          plugin = nvim-cmp;
-          config = builtins.readFile ./neovim/plugins/cmp.lua;
-          type = "lua";
-        }
-
-        {
-          plugin = nvim-tree-lua;
-          config = builtins.readFile ./neovim/plugins/tree.lua;
-          type = "lua";
-        }
+        (luaConfig nvim-cmp ./neovim/plugins/cmp.lua)
+        (luaConfig nvim-tree-lua ./neovim/plugins/tree.lua)
 
         (autoConfig nvim-web-devicons "nvim-web-devicons")
         (autoConfig comment-nvim "Comment")
@@ -181,17 +174,8 @@
           type = "lua";
         }
 
-        {
-          plugin = nvim-autopairs;
-          config = builtins.readFile ./neovim/plugins/autopairs.lua;
-          type = "lua";
-        }
-
-        {
-          plugin = lualine-nvim;
-          config = builtins.readFile ./neovim/plugins/lualine.lua;
-          type = "lua";
-        }
+        (luaConfig nvim-autopairs ./neovim/plugins/autopairs.lua)
+        (luaConfig lualine-nvim ./neovim/plugins/lualine.lua)
 
         {
           plugin = toggleterm-nvim;
