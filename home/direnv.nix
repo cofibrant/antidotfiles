@@ -2,7 +2,7 @@
 
 {
   programs.direnv = {
-    enable = config.antidotfiles.toggles.enableCLIUtils;
+    enable = config.antidotfiles.cliUtils.enable;
     nix-direnv.enable = true;
   };
 }

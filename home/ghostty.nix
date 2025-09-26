@@ -1,12 +1,13 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 
-with config.antidotfiles.toggles;
+with lib;
+with config.antidotfiles;
 {
   # TODO(@cofibrant) switch to managing `ghostty` installation via `nix`
   # if / when package is released
   # (c.f. https://github.com/ghostty-org/ghostty/discussions/2824)
-  programs.ghostty.enable = !pkgs.stdenv.isDarwin && enableGUIUtilities;
-  home.file = {
+  programs.ghostty.enable = !pkgs.stdenv.isDarwin && guiUtils.enable;
+  home.file = mkIf guiUtils.enable {
     # Config reference https://ghostty.org/docs/config/reference
     ".config/ghostty/config".text = ''
       font-family = FiraCode Nerd Font Mono
@@ -15,7 +16,7 @@ with config.antidotfiles.toggles;
       scrollback-limit = 50000
       theme = iro
     '';
-    ".config/ghostty/themes/iro".text = with config.antidotfiles.colours; ''
+    ".config/ghostty/themes/iro".text = with colours; ''
       palette = 0=#${zero}
       palette = 1=#${red}
       palette = 2=#${green}

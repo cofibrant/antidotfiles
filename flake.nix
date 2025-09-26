@@ -34,6 +34,7 @@
         {
           system ? "aarch64-darwin",
           username ? "nathan",
+          extraHomeConfig ? { },
         }:
         nameValuePair name (
           darwin.lib.darwinSystem {
@@ -63,7 +64,10 @@
                 home-manager = {
                   useGlobalPkgs = true;
                   useUserPackages = true;
-                  users."${username}" = import ./home;
+                  users."${username}" = {
+                    imports = [ ./home ];
+                    config = extraHomeConfig;
+                  };
                 };
               }
             ];
@@ -72,7 +76,11 @@
     in
     {
       darwinConfigurations = mapAttrs' mkDarwinConfiguration {
-        mithridate = { };
+        mithridate = {
+          extraHomeConfig.antidotfiles = {
+            typesetting.enable = true;
+          };
+	};
         nepenthe = { };
       };
 

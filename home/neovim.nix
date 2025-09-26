@@ -6,15 +6,15 @@
 }:
 
 with lib;
-with config.antidotfiles.toggles;
+with config.antidotfiles;
 {
-  home.file."./.config/nvim/lua/themes/" = optionals enableDevTools {
+  home.file.".config/nvim/lua/themes/" = mkIf devTools.enable {
     source = ./neovim/themes;
     recursive = true;
   };
 
   programs.neovim = {
-    enable = enableDevTools;
+    enable = devTools.enable;
 
     defaultEditor = true;
     viAlias = true;

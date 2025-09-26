@@ -2,7 +2,7 @@
 
 {
   programs.git = {
-    enable = config.antidotfiles.toggles.enableGit;
+    enable = config.antidotfiles.git.enable;
     userEmail = "me@nathancorbyn.com";
     userName = "Nathan Corbyn";
     extraConfig = {

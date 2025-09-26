@@ -2,7 +2,7 @@
 
 {
   programs.gh = {
-    enable = config.antidotfiles.toggles.enableGit;
+    enable = config.antidotfiles.git.enable;
     settings.editor = "${pkgs.neovim}/bin/nvim";
     gitCredentialHelper = {
       enable = true;
