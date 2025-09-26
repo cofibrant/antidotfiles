@@ -29,12 +29,30 @@
         };
       };
 
+      mkHomeManagerConfiguration =
+        {
+          username ? "nathan",
+          antidotfiles,
+        }:
+        { ... }:
+        {
+          nixpkgs = nixpkgsConfig;
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users."${username}" = {
+              imports = [ ./home ];
+              config.antidotfiles = antidotfiles;
+            };
+          };
+        };
+
       mkDarwinConfiguration =
         name:
         {
           system ? "aarch64-darwin",
           username ? "nathan",
-          extraHomeConfig ? { },
+          antidotfiles ? { },
         }:
         nameValuePair name (
           darwin.lib.darwinSystem {
@@ -44,7 +62,6 @@
                 { pkgs, ... }:
                 {
                   networking.hostName = name;
-
                   users = {
                     users."${username}" = {
                       name = username;
@@ -58,18 +75,10 @@
               (import ./configuration.nix)
               # `home-manager` module
               home-manager.darwinModules.home-manager
-              {
-                nixpkgs = nixpkgsConfig;
-                # `home-manager` config
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users."${username}" = {
-                    imports = [ ./home ];
-                    config = extraHomeConfig;
-                  };
-                };
-              }
+              # `home-manager` config
+              (mkHomeManagerConfiguration {
+                inherit username antidotfiles;
+              })
             ];
           }
         );
@@ -77,10 +86,8 @@
     {
       darwinConfigurations = mapAttrs' mkDarwinConfiguration {
         mithridate = {
-          extraHomeConfig.antidotfiles = {
-            typesetting.enable = true;
-          };
-	};
+          antidotfiles.typesetting.enable = true;
+        };
         nepenthe = { };
       };
 
