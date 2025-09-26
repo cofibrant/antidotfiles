@@ -50,7 +50,15 @@ with lib;
       light4 = mkColour "lighter grey" "8f9fa1";
     };
 
-  imports = [ (import ./config) ];
+  imports = [
+    ./direnv.nix
+    ./fish.nix
+    ./git.nix
+    ./gh.nix
+    ./ghostty.nix
+    ./neovim.nix
+    ./starship.nix
+  ];
 
   config = {
     home = {
@@ -60,7 +68,6 @@ with lib;
       language.base = "en_GB.utf8";
       sessionPath = [ "\${HOME}/.cargo/bin" ];
 
-      # TODO(@cofibrant) add `ghostty` carefully for relevant systems
       packages =
         with pkgs;
         [
@@ -83,7 +90,7 @@ with lib;
           # type-setting
           texlive.combined.scheme-full
         ]
-        ++ lib.optionals stdenv.isDarwin [
+        ++ optionals stdenv.isDarwin [
           # macOS noise
           cocoapods
           m-cli

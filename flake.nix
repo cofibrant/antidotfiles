@@ -53,7 +53,7 @@
                   };
                 }
               )
-              # Main `nix-darwin` config
+              # main `nix-darwin` config
               (import ./configuration.nix)
               # `home-manager` module
               home-manager.darwinModules.home-manager
@@ -63,7 +63,7 @@
                 home-manager = {
                   useGlobalPkgs = true;
                   useUserPackages = true;
-                  users."${username}" = ./home.nix;
+                  users."${username}" = import ./home;
                 };
               }
             ];
