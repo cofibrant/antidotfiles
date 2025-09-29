@@ -52,11 +52,21 @@ with lib;
         light4 = mkColour "lighter grey" "8f9fa1";
       };
 
-    devTools.enable = mkEnableOption "development tools" // { default = true; };
-    cliUtils.enable = mkEnableOption "CLI utilities" // { default = true; };
-    git.enable = mkEnableOption "Git and associated tools" // { default = true; };
-    guiUtils.enable = mkEnableOption "GUI utilities" // { default = true; };
-    fonts.enable = mkEnableOption "fonts" // { default = true; };
+    devTools.enable = mkEnableOption "development tools" // {
+      default = true;
+    };
+    cliUtils.enable = mkEnableOption "CLI utilities" // {
+      default = true;
+    };
+    git.enable = mkEnableOption "Git and associated tools" // {
+      default = true;
+    };
+    guiUtils.enable = mkEnableOption "GUI utilities" // {
+      default = true;
+    };
+    fonts.enable = mkEnableOption "fonts" // {
+      default = true;
+    };
     typesetting.enable = mkEnableOption "type-setting tools";
   };
 
@@ -88,6 +98,7 @@ with lib;
           gnumake
           clang-tools
           cmake
+          ninja
         ]
         ++ optionals fonts.enable [
           # fonts
