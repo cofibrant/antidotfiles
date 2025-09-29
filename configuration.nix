@@ -4,7 +4,7 @@
   ...
 }:
 {
-  system.stateVersion = 4;
+  system.stateVersion = 5;
 
   nix.settings.substituters = [ "https://cache.nixos.org/" ];
   nix.settings.trusted-public-keys = [

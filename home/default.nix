@@ -72,7 +72,7 @@ with lib;
 
   config = {
     home = {
-      stateVersion = "23.05";
+      stateVersion = "25.05";
 
       keyboard.layout = "gb";
       language.base = "en_GB.utf8";
