@@ -89,6 +89,7 @@
           antidotfiles.typesetting.enable = true;
         };
         nepenthe = { };
+        ambrosia = { };
       };
 
       overlays = {
