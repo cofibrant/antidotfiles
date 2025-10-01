@@ -58,8 +58,22 @@ with lib;
     cliUtils.enable = mkEnableOption "CLI utilities" // {
       default = true;
     };
-    git.enable = mkEnableOption "Git and associated tools" // {
-      default = true;
+    git = {
+      enable = mkEnableOption "Git and associated tools" // {
+        default = true;
+      };
+      email = mkOption {
+        default = "me@nathancorbyn.com";
+        description = "Git user email address";
+        example = "hello@example.com";
+        type = types.str;
+      };
+      hooksPath = mkOption {
+        default = null;
+        description = "Git hooks directory";
+        example = "hooks/";
+        type = types.nullOr types.str;
+      };
     };
     guiUtils.enable = mkEnableOption "GUI utilities" // {
       default = true;

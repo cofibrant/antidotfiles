@@ -3,14 +3,17 @@
 {
   programs.git = {
     enable = config.antidotfiles.git.enable;
-    userEmail = "me@nathancorbyn.com";
+    userEmail = config.antidotfiles.git.email;
     userName = "Nathan Corbyn";
     extraConfig = {
       credential.helper = "store";
-      core.askPass = "";
-      core.editor = "${pkgs.neovim}/bin/nvim";
-      core.pager = "${pkgs.gitAndTools.delta}/bin/delta";
       pull.rebase = true;
+      core = {
+        askPass = "";
+        editor = "${pkgs.neovim}/bin/nvim";
+        pager = "${pkgs.gitAndTools.delta}/bin/delta";
+        hooksPath = config.antidotfiles.git.hooksPath;
+      };
     };
   };
 }

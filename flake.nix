@@ -88,11 +88,10 @@
         mithridate = {
           antidotfiles.typesetting.enable = true;
         };
-        nepenthe = { };
-        ambrosia = {
-          antidotfiles = {
-            guiUtils.enable = false;
-            fonts.enable = false;
+        nepenthe = {
+          antidotfiles.git = {
+            email = "n_corbyn@apple.com";
+            hooksPath = "dt-git-hooks/hooks";
           };
         };
       };
