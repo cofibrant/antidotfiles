@@ -82,6 +82,9 @@ with lib;
       default = true;
     };
     typesetting.enable = mkEnableOption "type-setting tools";
+    xcodeTools.enable = mkEnableOption "Xcode tools" // {
+      default = false;
+    };
   };
 
   imports = [

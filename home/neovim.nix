@@ -77,7 +77,12 @@ with config.antidotfiles;
             })
 
             lsp.config('clangd', {
-              cmd = { '${pkgs.clang-tools}/bin/clangd' },
+              cmd = { ${
+                if config.antidotfiles.xcodeTools.enable then
+                  "'xcrun', 'clangd'"
+                else
+                  "'${pkgs.clang-tools}/bin/clangd'"
+              } },
               filetypes = { 'c', 'cpp' },
               root_markers = { '.clangd', 'compile_commands.json' },
             })

@@ -89,9 +89,12 @@
           antidotfiles.typesetting.enable = true;
         };
         nepenthe = {
-          antidotfiles.git = {
-            email = "n_corbyn@apple.com";
-            hooksPath = "dt-git-hooks/hooks";
+          antidotfiles = {
+            git = {
+              email = "n_corbyn@apple.com";
+              hooksPath = "dt-git-hooks/hooks";
+            };
+            xcodeTools.enable = true;
           };
         };
       };

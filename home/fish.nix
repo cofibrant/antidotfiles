@@ -11,6 +11,8 @@
       set -x TERM xterm-256color
 
       eval (${pkgs.direnv}/bin/direnv hook fish)
+
+      fish_vi_key_bindings
     '';
   };
 }
