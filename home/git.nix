@@ -12,7 +12,7 @@
         askPass = "";
         editor = "${pkgs.neovim}/bin/nvim";
         pager = "${pkgs.gitAndTools.delta}/bin/delta";
-        hooksPath = config.antidotfiles.git.hooksPath;
+        hooksPath = "${config.home.homeDirectory}/${config.antidotfiles.git.hooksPath}";
       };
     };
   };
