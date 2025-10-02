@@ -13,6 +13,10 @@
       palette = "iro";
       character = {
         success_symbol = "[❯](bold blue)[❯](bold green)[❯](bold yellow)[❯](bold red)";
+        vimcmd_symbol = "[❮](bold blue)[❮](bold green)[❮](bold yellow)[❮](bold red)";
+        vimcmd_visual_symbol = "[❯❯❯❯](bold yellow)";
+        vimcmd_replace_symbol = "[❯❯❯❯](bold orange)";
+        vimcmd_replace_one_symbol = "[❯❯❯❯](bold orange)";
         error_symbol = "[❯❯❯❯](bold red)";
       };
       directory = {
