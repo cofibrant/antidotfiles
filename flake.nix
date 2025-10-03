@@ -92,7 +92,10 @@
           antidotfiles = {
             git = {
               email = "n_corbyn@apple.com";
-              hooksPath = "dt-git-hooks/hooks";
+              hooks = {
+                enable = true;
+                path = "dt-git-hooks/hooks";
+              };
             };
             xcodeTools.enable = true;
           };

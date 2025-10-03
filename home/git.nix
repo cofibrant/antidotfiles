@@ -1,5 +1,11 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
+with lib;
 {
   programs.git = {
     enable = config.antidotfiles.git.enable;
@@ -12,7 +18,9 @@
         askPass = "";
         editor = "${pkgs.neovim}/bin/nvim";
         pager = "${pkgs.gitAndTools.delta}/bin/delta";
-        hooksPath = "${config.home.homeDirectory}/${config.antidotfiles.git.hooksPath}";
+      }
+      // optionalAttrs config.antidotfiles.git.hooks.enable {
+        hooksPath = "${config.home.homeDirectory}/${config.antidotfiles.git.hooks.path}";
       };
     };
   };

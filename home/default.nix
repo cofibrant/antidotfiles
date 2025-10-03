@@ -68,11 +68,14 @@ with lib;
         example = "hello@example.com";
         type = types.str;
       };
-      hooksPath = mkOption {
-        default = null;
-        description = "Git hooks directory";
-        example = "hooks/";
-        type = types.nullOr types.str;
+      hooks = {
+        enable = mkEnableOption "Enable a global set of Git hooks";
+        path = mkOption {
+          default = null;
+          description = "Git hooks directory";
+          example = "hooks";
+          type = types.nullOr types.str;
+        };
       };
     };
     guiUtils.enable = mkEnableOption "GUI utilities" // {
