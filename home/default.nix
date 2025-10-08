@@ -116,6 +116,7 @@ with lib;
           python3
           rustup
           gnumake
+          graphviz
           clang-tools
           cmake
           ccache

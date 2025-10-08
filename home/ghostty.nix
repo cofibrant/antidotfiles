@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 with lib;
 with config.antidotfiles;
@@ -13,7 +18,7 @@ with config.antidotfiles;
       font-family = FiraCode Nerd Font Mono
       font-thicken
       font-size = 13
-      scrollback-limit = 50000
+      scrollback-limit = 500000
       theme = iro
     '';
     ".config/ghostty/themes/iro".text = with colours; ''
