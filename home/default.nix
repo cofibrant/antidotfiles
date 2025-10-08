@@ -118,6 +118,7 @@ with lib;
           gnumake
           clang-tools
           cmake
+          ccache
           ninja
         ]
         ++ optionals fonts.enable [
